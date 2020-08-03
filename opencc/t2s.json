@@ -1,0 +1,25 @@
+{
+  "name": "Traditional Chinese to Simplified Chinese",
+  "segmentation": {
+    "type": "mmseg",
+    "dict": {
+      "type": "ocd",
+      "file": "TSPhrases.ocd"
+    }
+  },
+  "conversion_chain": [{
+    "dict": {
+      "type": "group",
+      "dicts": [{
+        "type": "ocd",
+        "file": "TSPhrases.ocd"
+      }, {
+        "type": "ocd",
+        "file": "TSCharacters.ocd"
+      }, {
+        "type": "text",
+        "file": "t2s.custom.txt"
+      }]
+    }
+  }]
+}

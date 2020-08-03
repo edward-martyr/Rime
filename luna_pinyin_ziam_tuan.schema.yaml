@@ -1,0 +1,195 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: luna_pinyin_ziam_tuan
+  name: 朙月尖團
+  version: "0.24"
+  author:
+    - 佛振 <chen.sst@gmail.com>
+  description: |
+    Rime 預設的拼音輸入方案。
+    參考以下作品而創作：
+      * CC-CEDICT
+      * Android open source project
+      * Chewing - 新酷音
+      * opencc - 開放中文轉換
+  dependencies:
+    - stroke
+
+switches:
+  - options: [ zh_trad, mainland_simplification, t2jp_simplification, t2var1, t2var2, zh_old ]
+    states: [ 正體, 简体, 新体, 通體, 異體, 舊體 ]
+    reset: 0
+  - name: extended_charset
+    states: [ 通用, 增廣 ]
+    reset: 0
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - table_translator@custom_phrase
+    - reverse_lookup_translator
+    - script_translator
+    - lua_translator@date_translator
+    - lua_translator@number_translator
+  filters:
+    - "simplifier@trad"
+    - "simplifier@mainland_simplifier"
+    - "simplifier@t2jp_simplifier"
+    - "simplifier@t2var1"
+    - "simplifier@t2var2"
+    - "simplifier@zh_old"
+    - uniquifier
+
+speller:
+  alphabet: zyxwvutsrqponmlkjihgfedcba
+  delimiter: " '"
+  algebra:
+    - "erase/^xx$/"
+    # 設置模糊音
+    - "derive/ii$/r/"
+#    - "derive/^([hkg])v/$1u/"
+
+    - "derive/^([nl])ve$/$1ue/"
+    - "derive/[zg]([iv])/j$1/"
+    - "derive/[ck]([iv])/q$1/"
+    - "derive/[sh]([iv])/x$1/"
+#    - "derive/[g]([iv])/j$1/"
+#    - "derive/[k]([iv])/q$1/"
+#    - "derive/[h]([iv])/x$1/"
+    - "derive/^([jqxy])v/$1u/"
+    - "derive/([zcs]h|r)ii$/$1i/"
+    - "xform/m$/n/"
+    - "derive/ia([mn])$/ie$1/"
+    - "derive/([bpmfw])ong/$1eng/"
+    - "derive/un$/uen/"
+    - "derive/ui$/uei/"
+#    - "derive/iu$/iou/"
+    # 兼容中州羅馬字 {
+    #- "derive/^([nlzcs])ong$/$1iong/"
+    #- "derive/^yong$/yvng/"
+    #- "derive/iong$/vng/"
+    #- "derive/^([jqx])iong$/$1ung/"
+    #- "derive/ong$/ung/"
+    #- "derive/^we([in])/wu$1/"
+    #- "derive/ao$/au/"
+    #- "derive/ve$/vo/"
+    #- "derive/^([jqxy])ve$/$1uo/"
+    #- "derive/([zcs]h?|r)ii$/$1y/"
+    #- "derive/([zcs]h|r)u$/$1v/"
+    #- "derive/([fw])ei$/$1i/"
+    #- "derive/([nlw])ei$/$1ui/"
+    # }
+    # 糾錯
+    - "derive/([aeiou])ng$/$1gn/"
+    - "derive/([dtngkhrzcs])o(u|ng)$/$1o/"
+    - "derive/ong$/on/"
+    - "derive/ao$/oa/"
+    - "derive/iao$/io/"
+    - "derive/ao$/au/"
+    - "derive/^di/fi/"
+    - "derive/([iu])a([ou]|ng?)$/a$1$2/"
+    # 簡拼
+    - abbrev/^([a-z]).+$/$1/
+    - abbrev/^([zcs]h).+$/$1/
+
+translator:
+  dictionary: luna_pinyin_ziam_tuan.extended
+  preedit_format:
+    - xform/v/ü/
+    - xform/ii/ï/
+
+custom_phrase:
+  dictionary: ""
+  user_dict: custom_phrase
+  db_class: stabledb
+  enable_completion: false
+  enable_sentence: false
+  initial_quality: 1
+
+reverse_lookup:
+  dictionary: stroke
+  enable_completion: true
+  prefix: "`"
+  suffix: "'"
+  tips: 〔筆畫〕
+  preedit_format:
+    - xlit/hspnz/一丨丿丶乙/
+  comment_format:
+    - xform/v/ü/
+    - xform/ii/ï/
+
+trad:
+  option_name: trad  # universal interface, functions in trime keyboard
+  opencc_config: t2t.json
+  tips: &simp_tags
+    [ abc, reverse_lookup ]  # effective for both main translator and luna_pinyin translator
+
+mainland_simplifier:
+  import_preset: default
+  option_name: mainland_simplification  # universal interface, functions in trime keyboard
+  tags: &simp_tags
+    [ abc, reverse_lookup ]  # effective for both main translator and luna_pinyin translator
+
+t2jp_simplifier:
+  import_preset: default
+  option_name: t2jp_simplification
+  opencc_config: t2jp.json
+  tags: &simp_tags
+    [ abc, reverse_lookup ]  # effective for both main translator and luna_pinyin translator
+
+zh_old:
+  option_name: zh_old
+  opencc_config: zh_old.json
+  tips: &simp_tags
+    [ abc, reverse_lookup ]  # effective for both main translator and luna_pinyin translator
+
+t2var1:
+  import_preset: default
+  option_name: t2var1
+  opencc_config: t2var1.json
+  tags: &simp_tags
+    [ abc, reverse_lookup ]  # effective for both main translator and luna_pinyin translator
+
+t2var2:
+  import_preset: default
+  option_name: t2var2
+  opencc_config: t2var2.json
+  tags: &simp_tags
+    [ abc, reverse_lookup ]  # effective for both main translator and luna_pinyin translator
+
+punctuator:
+  import_preset: default
+
+key_binder:
+  import_preset: default
+  bindings:
+    - { when: always, accept: Control+Shift+comma, toggle: mainland_simplification }
+    - { when: always, accept: Control+Shift+period, toggle: t2jp_simplification }
+    - { when: always, accept: Control+Shift+1, toggle: t2var1 }
+    - { when: always, accept: Control+Shift+2, toggle: t2var2 }
+    - { when: always, accept: Control+Shift+3, toggle: zh_old }
+    - { when: always, accept: Control+Shift+exclam, toggle: t2var1 }
+    - { when: always, accept: Control+Shift+at, toggle: t2var2 }
+
+recognizer:
+  import_preset: default
+  patterns:
+    punct: '^/([0-9]0?|[A-Za-z]+)$'
+    reverse_lookup: "`[a-z]*'?$"

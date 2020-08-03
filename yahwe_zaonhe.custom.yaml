@@ -1,0 +1,9 @@
+__patch:
+# Rx: emoji:customize:schema=yahwe_zaonhe {
+  - patch/+:
+      __include: emoji_suggestion:/patch
+# }
+# Rx: BlindingDark/rime-easy-en:customize:schema=yahwe_zaonhe {
+  - patch/+:
+      __include: easy_en:/patch
+# }

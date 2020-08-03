@@ -1,0 +1,90 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: kanazaonhe
+  name: "仮名上海話"
+  version: "2020.01.08"
+  author:
+    - 埃爾德路 ‹edwardmartyr@outlook.com›
+  # description: |
+  #   変体仮名インプット＋相応の漢字インプット
+  #   Based on the Wikipedia page for Hentaigana
+
+switches:
+  - options: [ noop, renderablekana ]
+    states: [ 𛅥, ェ ]
+  - name: full_shape
+    states: [ 半角, 全角 ]
+  - name: ascii_mode
+    states: [ 中文, 西文 ]
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - echo_translator
+    - punct_translator
+    - script_translator
+  filters:
+    - "simplifier@renderablekana"
+    - uniquifier
+
+speller:
+  alphabet: "abcdefghijklmnopqrstuvwxyz'"
+  delimiter: " ;"
+  algebra:
+    # Fuzzy spelling
+    - xform/&//
+    - derive/^ki/ci/
+    - derive/^khi/chi/
+    - derive/^gi/ji/
+    - derive/^hi/shi/
+    - derive/^ghi(|h|n)$/yi$1/
+    - derive/^ghi([aueo])/y$1/
+    - derive/^(|')ni(|h|n)$/$1nyi$2/
+    - derive/^(|')ni([aueo])/$1ny$2/
+    - derive/^ghu$/wu/
+    - derive/^ghu(.+)/w$1/
+    - derive/iui/iu/
+    - derive/^yui/yu/
+    - derive/(c|ch|j)i/$1/
+
+translator:
+  dictionary: kanazaonhe
+  spelling_hints: 5
+  comment_format:
+    - xform/&//
+
+renderablekana:
+  option_name: renderablekana
+  opencc_config: renderablekana.json
+  tags: &simp_tags
+    [ abc ]  
+
+punctuator:
+  import_preset: symbols
+  full_shape: 
+    ',' : { commit: '、' }
+    ' ' : { commit: '　' }
+    '-' : "ー"
+  half_shape: 
+    ',' : { commit: '､ ' }
+    ' ' : { commit: ' ' }
+    '-' : "ー"
+
+key_binder:
+  import_preset: default

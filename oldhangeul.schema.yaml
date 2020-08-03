@@ -1,0 +1,167 @@
+# Rime schema
+# vim: set sw=2 sts=2 et:
+# encoding: utf-8
+
+schema:
+  schema_id: oldhangeul
+  name: 한글
+  version: "2.0"
+  author:
+    - Sim Cheon Hyeong <2417647441@qq.com>
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ Kor, Eng ]
+  - name: full_shape
+    states: [ Half, Full ]
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - fluency_editor
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - r10n_translator
+    - reverse_lookup_translator
+    - table_translator
+  filters:
+    - simplifier
+    - uniquifier
+
+menu:
+  page_size: 6
+
+speller:
+  alphabet: 'qwertyasdfgzxcvQWETYADFGXCVuiophjklbnmRZ'
+  delimiter: " '"
+
+translator:
+  dictionary: oldhangeul
+  comment_format:
+    - 'xlit|qwertyasdfgzxcvQWETYADFGXCVuiophjklbnmRZ|АаБбВвГгДдЕеЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУу|'
+    - 'xform А b'
+    - 'xform а j'
+    - 'xform Б d'
+    - 'xform б g'
+    - 'xform В s'
+    - 'xform в z'
+    - 'xform Г m'
+    - 'xform г n'
+    - 'xform Д ɦ'
+    - 'xform д r'
+    - 'xform Е h'
+    - 'xform е k'
+    - 'xform Ж t'
+    - 'xform ж c'
+    - 'xform З p'
+    - 'xform з v'
+    - 'xform И j¹'
+    - 'xform и j²'
+    - 'xform Й s¹'
+    - 'xform й s²'
+    - 'xform К ɱ'
+    - 'xform к ŋ'
+    - 'xform Л ɾ'
+    - 'xform л x'
+    - 'xform М c¹'
+    - 'xform м c²'
+    - 'xform Н f'
+    - 'xform н yo'
+    - 'xform О ye'
+    - 'xform о ya'
+    - 'xform П æ'
+    - 'xform п o'
+    - 'xform Р e'
+    - 'xform р a'
+    - 'xform С i'
+    - 'xform с yu'
+    - 'xform Т u'
+    - 'xform т ɯ'
+    - 'xform У D'
+    - 'xform у T'
+    - 'xform j¹j¹ jj¹'
+    - 'xform j²j² jj²'
+    - 'xform s¹s¹ ss¹'
+    - 'xform s²s² ss²'
+    - 'xform ii yi'
+    - 'xform iæ yæ'
+    - 'xform iɯ yɯ'
+  preedit_format:
+    - 'xlit|qwertyasdfgzxcvQWETYADFGXCVuiophjklbnmRZ|АаБбВвГгДдЕеЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУу|'
+    - 'xform А b'
+    - 'xform а j'
+    - 'xform Б d'
+    - 'xform б g'
+    - 'xform В s'
+    - 'xform в z'
+    - 'xform Г m'
+    - 'xform г n'
+    - 'xform Д ɦ'
+    - 'xform д r'
+    - 'xform Е h'
+    - 'xform е k'
+    - 'xform Ж t'
+    - 'xform ж c'
+    - 'xform З p'
+    - 'xform з v'
+    - 'xform И j¹'
+    - 'xform и j²'
+    - 'xform Й s¹'
+    - 'xform й s²'
+    - 'xform К ɱ'
+    - 'xform к ŋ'
+    - 'xform Л ɾ'
+    - 'xform л x'
+    - 'xform М c¹'
+    - 'xform м c²'
+    - 'xform Н f'
+    - 'xform н yo'
+    - 'xform О ye'
+    - 'xform о ya'
+    - 'xform П æ'
+    - 'xform п o'
+    - 'xform Р e'
+    - 'xform р a'
+    - 'xform С i'
+    - 'xform с yu'
+    - 'xform Т u'
+    - 'xform т ɯ'
+    - 'xform У D'
+    - 'xform у T'
+    - 'xform j¹j¹ jj¹'
+    - 'xform j²j² jj²'
+    - 'xform s¹s¹ ss¹'
+    - 'xform s²s² ss²'
+    - 'xform ii yi'
+    - 'xform iæ yæ'
+    - 'xform iɯ yɯ'
+
+reverse_lookup:
+  dictionary: hangeul
+  enable_completion: true
+  prefix: "`"
+  tips: 〔Hangeul〕
+
+punctuator:
+  import_preset: default
+
+key_binder:
+  import_preset: default
+
+recognizer:
+  patterns:
+    reverse_lookup: "`[a-z]*$"

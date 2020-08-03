@@ -1,0 +1,16 @@
+{
+  "name": "Traditional Chinese to CJK Compatibility",
+  "segmentation": {
+    "type": "mmseg",
+    "dict": {
+      "type": "text",
+      "file": "CJK_comp.txt"
+    }
+  },
+  "conversion_chain": [{
+    "dict": {
+      "type": "text",
+      "file": "CJK_comp.txt"
+    }
+  }]
+}

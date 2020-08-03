@@ -1,0 +1,203 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: yahwe_zaonhe
+  name: 吳協式上海言話
+  version: "2019.08.01"
+  author:
+    - 埃爾德路 ‹edwardmartyr@outlook.com›
+  description: |
+    上海言話
+    拼寫方案採用吳語協會式
+    http://wu-chinese.com/romanization/
+    http://wu-chinese.com/minidict/
+  dependencies:
+    - luna_pinyin
+
+switches:
+  - options: [ zh_trad, zht2zhs, nippon, comp, dzing, zh_old ]
+    states: [ 正體, 简体, 新体, 通體, 異體, 舊體 ]
+#    states:
+#      - 字形 → 傳統漢字
+#      - 字形 → 大陆简化字
+#      - 字形 → 日本新字体
+#      - 字形 → 中日韓兼容
+#      - 字形 → 叔寍正體
+    reset: 0
+#  - name: ascii_mode
+  - name: extended_charset
+    states: [ 通用, 增廣 ]
+    reset: 0
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - script_translator
+    - reverse_lookup_translator
+    - lua_translator@date_translator
+    # - lua_translator@number_translator
+  filters:
+    - "simplifier@trad"
+    - "simplifier@zht2zhs"
+    - "simplifier@nippon"
+    - "simplifier@zh_old"
+    - "simplifier@comp"
+    - "simplifier@dzing"
+    - "reverse_lookup_filter@luna_pinyin_reverse_lookup"
+    - uniquifier
+
+speller:
+  alphabet: ";zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA"
+  delimiter: " '"
+  algebra:
+    - xform/'/;/
+    - abbrev/^([a-z]).+$/$1/
+    - abbrev/^([kptgcs]h).+$/$1/
+    - abbrev/^(ts|ng|dz|ny).+$/$1/
+    - abbrev/^(tsh).+$/$1/
+    - abbrev/^(')(m|l|n|ny|ng).+$/$1$2/
+
+    # - derive/([psdfghklzvbnm])u/$1ou/
+    # - derive/ghoh/woh/
+    - derive/^zaon/laon/
+    #  - derive/^zi(?=a)/y/                          # 謝謝 zia ya; 好像 hau yan
+
+    - derive/aeh$/ah/                        # 模糊前後ah
+
+    - derive/ny([aeou])/ni$1/                    # 簡寫以及更多易錯模糊
+    - derive/nyi/ni/
+    - derive/^tsh/tt/
+    - derive/^sh/x/
+    - derive/^ch/q/
+    # - derive/([aoei])h$/$1$1/
+    # - derive/uih$/uu/
+    # - derive/([sz])y/$1$1/
+    # - derive/^tshy/ttt/
+    - derive/ui/u/
+    - derive/^ng/G/
+    - derive/^gh/H/
+
+    - derive/^([sc]h)in/$1n/
+    - derive/^([cjyqx])in/$1n/
+    - derive/iau$/$1io/
+    - derive/(y)au/$1o/
+    - derive/([bpmnsztdhuwvklg])en/$1n/
+
+    - derive/^(c|ch|j|ny|sh|x|q)i([aeou])/$1$2/
+    - derive/^(ts|z|dz|s|l)i(eu)/$1$2/
+    - derive/([zsht])yu/$1y/                # 模糊“書”“詩”
+    - derive/aon$/an/                         # 模糊前後an
+    - derive/an$/aon/
+
+    - derive/oe$/O/
+    - derive/uoe$/U/
+    - derive/ts/S/
+    - derive/^tsh/T/
+#    - derive/^ny/N/
+#    - derive/([aeio])n$/$1N/
+    - derive/ae$/E/
+#    - derive/^ji/gi/
+#    - derive/^ci/ki/
+#    - derive/^chi/khi/
+#    - derive/^shi/hi/
+
+translator:
+  dictionary: yahwe_zaonhe
+  comment_format:
+    - xform/;/'/
+    - xform/gh/ɦ/
+  prism: yahwe_zaonhe
+  spelling_hints: 6
+
+reverse_lookup:
+  tags: [luna_pinyin]
+  dictionary: luna_pinyin
+  prefix: "`"
+  suffix: "'"
+  tips: 〔拼音〕
+  preedit_format:
+    - xform/([nl])v/$1ü/
+    - xform/([nl])ue/$1üe/
+    - xform/([jqxy])v/$1u/
+  comment_format:
+    - xform/([nlm])h/'$1/
+    - xform/(ny)h/'$1/
+#    - xform/gh/ɦ/
+
+trad:
+  option_name: trad  # universal interface, functions in trime keyboard
+  opencc_config: t2t.json
+  tips: &simp_tags
+    [ abc, reverse_lookup ]  # effective for both main translator and luna_pinyin translator
+
+zht2zhs:
+  option_name: zht2zhs  # universal interface, functions in trime keyboard
+  opencc_config: t2s.json
+  tips: &simp_tags
+    [ abc, reverse_lookup ]  # effective for both main translator and luna_pinyin translator
+
+nippon:
+  option_name: nippon
+  opencc_config: t2jp.json
+  tips: &simp_tags
+    [ abc, reverse_lookup ]  # effective for both main translator and luna_pinyin translator
+    
+zh_old:
+  option_name: zh_old
+  opencc_config: zh_old.json
+  tips: &simp_tags
+    [ abc, reverse_lookup ]  # effective for both main translator and luna_pinyin translator
+
+comp:
+  option_name: comp
+  opencc_config: t2var1.json
+  tips: &simp_tags
+    [ abc, reverse_lookup ]  # effective for both main translator and luna_pinyin translator
+
+dzing:
+  option_name: dzing
+  opencc_config: t2var2.json
+  tips: &simp_tags
+    [ abc, reverse_lookup ]  # effective for both main translator and luna_pinyin translator
+
+key_binder:
+  import_preset: default
+  bindings:
+    - { when: always, accept: Control+Shift+comma, toggle: zht2zhs }
+    - { when: always, accept: Control+Shift+period, toggle: nippon }
+    - { when: always, accept: Control+Shift+1, toggle: comp }
+    - { when: always, accept: Control+Shift+2, toggle: dzing }
+    - { when: always, accept: Control+Shift+3, toggle: zh_old }
+    - { when: always, accept: Control+Shift+exclam, toggle: comp }
+    - { when: always, accept: Control+Shift+at, toggle: dzing }
+
+recognizer:
+  patterns:
+    email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
+    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
+    reverse_lookup: "`[a-z]*'?$"
+    punct: '^/([0-9]0?|[A-Za-z]+)$'
+
+punctuator:
+  import_preset: default
+  full_shape: 
+    ':' : [ ：, ； ]
+  half_shape: 
+    ':' : [ ：, ； ]
+    # '…' : { commit: '；' }

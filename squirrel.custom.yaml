@@ -1,0 +1,203 @@
+patch:
+  us_keyboard_layout: true      # 鍵盤選項：應用美式鍵盤佈局
+  show_notifications_when: growl_is_running  # 狀態通知，默認裝有Growl時顯示，也可設爲全開（always）全關（never）
+
+  preset_color_schemes/mojave_new:
+    name: 沙漠夜／Mojave New
+    horizontal: true                        # 水平排列
+    inline_preedit: true                    # 单行显示，false双行显示
+    candidate_format: "%c\u2005%@"    # 用 1/6 em 空格 U+2005 来控制编号 %c 和候选词 %@ 前后的空间。
+    corner_radius: 5                        # 候选条圆角
+    hilited_corner_radius: 3                # 高亮圆角
+    border_height: 8                        # 窗口边界高度，大于圆角半径才生效
+    border_width: 10                         # 窗口边界宽度，大于圆角半径才生效
+    border_color_width: 10
+    font_face: "PingFangSC-Light"                 # 候选词字体
+    label_font_face: "MyriadPro-LightSemiCn"    # 我喜歡的字體名稱
+    font_point: 16                          # 候选字词大小
+    label_font_point: 14                    # 候选编号大小
+    text_color: 0xdedddd                    # 拼音行文字颜色，24位色值，16进制，BGR顺序
+    back_color: 0x252320                    # 候选条背景色
+    label_color: 0x888785                   # 预选栏编号颜色
+    border_color: 0x020202                  # 边框色
+    candidate_text_color: 0xdedddd          # 预选项文字颜色
+    hilited_text_color: 0xdedddd            # 高亮拼音 (需要开启内嵌编码)
+    hilited_back_color: 0x252320            # 高亮拼音 (需要开启内嵌编码)
+    hilited_candidate_text_color: 0xffffff  # 第一候选项文字颜色
+    hilited_candidate_back_color: 0xcb5d00  # 第一候选项背景背景色
+    hilited_candidate_label_color: 0xffffff # 第一候选项编号颜色
+    comment_text_color: 0xdedddd            # 拼音等提示文字颜色
+    #hilited_comment_text_color: 0xdedddd    # 注解文字高亮
+
+  preset_color_schemes/greyblue:
+    name: "Grey Blue"
+    horizontal: false                           # 候选条横向显示
+    inline_preedit: true                        # 启用内嵌编码模式，候选条首行不显示拼音
+    candidate_format: "%c.\u2005%@\u2005"       # 用 1/6 em 空格 U+2005 来控制编号 %c 和候选词 %@ 前后的空间。
+    corner_radius: 6                            # 候选条圆角半径
+    border_height: 0                            # 窗口边界高度，大于圆角半径才生效
+    border_width: 10                           # 窗口边界宽度，大于圆角半径才生效
+    back_color: 0xF6D7B5                        # 候选条背景色
+    line_spacing: 5                             # 候选词的行间距
+		# spacing: 3                                  # 在非内嵌编码模式下，预编辑和候选词之间的间距
+    border_color: 0xE0B693                      # 边框色
+    font_face: "PingFangHK-Thin"             # 候选词字体
+    font_point: 18                              # 预选栏文字字号
+    label_font_face: "MyriadPro-LightSemiCn"       # 候选词编号字体
+    label_font_point: 20                        # 预选栏编号字号
+    text_color: 0xF7F7F7                        # HEX颜色代码，但是要注意顺序是蓝绿红（倒序）0xBBGGRR
+    candidate_text_color: 0x000000              #非第一候选项
+    hilited_candidate_back_color: 0xD98840      #第一候选项背景
+    hilited_candidate_text_color: 0xFFFFFF      #第一候选项
+
+
+  preset_color_schemes/mojave_new_vert:
+    name: 沙漠夜／Mojave New
+    horizontal: false                        # 水平排列
+    inline_preedit: false                    # 单行显示，false双行显示
+    candidate_format: "%c\u2005%@"    # 用 1/6 em 空格 U+2005 来控制编号 %c 和候选词 %@ 前后的空间。
+    corner_radius: 5                        # 候选条圆角
+    hilited_corner_radius: 3                # 高亮圆角
+    border_height: 7                        # 窗口边界高度，大于圆角半径才生效
+    border_width: 8                         # 窗口边界宽度，大于圆角半径才生效
+    border_color_width: 8
+    font_face: "PingFangSC-Light"                 # 候选词字体
+#    label_font_face: "MyriadPro-LightSemiCn"    # 我喜歡的字體名稱
+    font_point: 17                          # 候选字词大小
+    label_font_point: 16                    # 候选编号大小
+    text_color: 0xdedddd                    # 拼音行文字颜色，24位色值，16进制，BGR顺序
+    back_color: 0x252320                    # 候选条背景色
+    label_color: 0x888785                   # 预选栏编号颜色
+    border_color: 0x020202                  # 边框色
+    candidate_text_color: 0xdedddd          # 预选项文字颜色
+    hilited_text_color: 0xdedddd            # 高亮拼音 (需要开启内嵌编码)
+    hilited_back_color: 0x252320            # 高亮拼音 (需要开启内嵌编码)
+    hilited_candidate_text_color: 0xffffff  # 第一候选项文字颜色
+    hilited_candidate_back_color: 0xcb5d00  # 第一候选项背景背景色
+    hilited_candidate_label_color: 0xffffff # 第一候选项编号颜色
+    comment_text_color: 0xdedddd            # 拼音等提示文字颜色
+    #hilited_comment_text_color: 0xdedddd    # 注解文字高亮
+
+  preset_color_schemes/azure_new_vert_jiuziti:
+    name: 青天／Azure
+    inline_preedit: true
+    author: 佛振 <chen.sst@gmail.com>
+    text_color: 0xcfa677
+    candidate_text_color: 0xffeacc
+    back_color: 0xee8b4e01
+    hilited_text_color: 0xffeacc
+    hilited_candidate_text_color: 0x7ffeff
+    hilited_candidate_back_color: 0x00000000
+    comment_text_color: 0xc69664
+    corner_radius: 5                        # 候选条圆角
+#    hilited_corner_radius: 3                # 高亮圆角
+    border_height: 8                        # 窗口边界高度，大于圆角半径才生效
+    border_width: 10                         # 窗口边界宽度，大于圆角半径才生效
+    font_face: "Sarasa Gothic CL Light"                 # 候选词字体
+    label_font_face: "MyriadPro-LightSemiCn"    # 我喜歡的字體名稱
+    font_point: 18                          # 候选字词大小
+    label_font_point: 17                    # 候选编号大小
+
+  preset_color_schemes/azure_new:
+    name: 青天／Azure
+    author: 佛振 <chen.sst@gmail.com>
+    horizontal: true
+    text_color: 0xcfa677
+    candidate_text_color: 0xffeacc
+    back_color: 0xee8b4e01
+    hilited_text_color: 0xffeacc
+    hilited_candidate_text_color: 0x7ffeff
+    hilited_candidate_back_color: 0x00000000
+    comment_text_color: 0xc69664
+    corner_radius: 5                        # 候选条圆角
+#    hilited_corner_radius: 3                # 高亮圆角
+    border_height: 8                        # 窗口边界高度，大于圆角半径才生效
+    border_width: 10                         # 窗口边界宽度，大于圆角半径才生效
+    font_face: "PingFangSC-Thin"                 # 候选词字体
+    label_font_face: "MyriadPro-LightSemiCn"    # 我喜歡的字體名稱
+    font_point: 16                          # 候选字词大小
+    label_font_point: 14.5                    # 候选编号大小
+
+  preset_color_schemes/azure_new_jiuziti:
+    name: 青天／Azure
+    author: 佛振 <chen.sst@gmail.com>
+    horizontal: true
+    inline_preedit: true
+    text_color: 0xcfa677
+    candidate_text_color: 0xffeacc
+    back_color: 0xee8b4e01
+    hilited_text_color: 0xffeacc
+    hilited_candidate_text_color: 0x7ffeff
+    hilited_candidate_back_color: 0x00000000
+    comment_text_color: 0xc69664
+    corner_radius: 5                        # 候选条圆角
+#    hilited_corner_radius: 3                # 高亮圆角
+    border_height: 8                        # 窗口边界高度，大于圆角半径才生效
+    border_width: 10                         # 窗口边界宽度，大于圆角半径才生效
+    font_face: "Sarasa Gothic CL Light"                 # 候选词字体
+    label_font_face: "MyriadPro-LightSemiCn"    # 我喜歡的字體名稱
+    font_point: 16                          # 候选字词大小
+    label_font_point: 14.5                    # 候选编号大小
+
+  preset_color_schemes/ifanrblack:
+    author: "Astrian Zheng"
+    back_color: 0x000000
+    border_height: 6
+    border_width: 6
+    candidate_format: "%c. %@ "
+    candidate_text_color: 0x2824C8
+    comment_text_color: 0xFFFFFF
+    corner_radius: 6
+    font_point: 16
+    hilited_candidate_back_color: 0x000000
+    hilited_candidate_label_color: 0xFFFFFF
+    hilited_candidate_text_color: 0xFFFFFF
+    hilited_text_color: 0xFFFFFF
+    horizontal: true
+    label_color: 0x2824C8
+    label_font_point: 12
+    name: "爱范儿黑"
+    text_color: 0x2824C8
+
+  preset_color_schemes/appsored:
+    author: "Astrian Zheng"
+    back_color: 0x2824C8
+    border_height: 6
+    border_width: 10
+    candidate_format: "%c. %@ "
+    candidate_text_color: 0xC5C3F2
+    comment_text_color: 0xFFFFFF
+    corner_radius: 6
+    font_point: 16
+    hilited_candidate_back_color: 0x2824C8
+    hilited_candidate_label_color: 0xFFFFFF
+    hilited_candidate_text_color: 0xFFFFFF
+    hilited_text_color: 0xFFFFFF
+    label_color: 0xC5C3F2
+    label_font_point: 12
+    name: "AppSo 红"
+    text_color: 0xC5C3F2
+    horizontal: true
+
+  style:
+    color_scheme: azure_new_vert_jiuziti      # 選擇配色方案
+    font_face: "Sarasa Gothic CL Light"                 # 候选词字体
+
+  app_options/com.apple.Xcode:
+    ascii_mode: true
+  app_options/com.jetbrains.intellij:
+    ascii_mode: true
+  app_options/com.jetbrains.pycharm:
+    ascii_mode: true
+  app_options/net.langui.NewFileMenuHelper:
+    ascii_mode: true
+  app_options/net.langui.NewFileMenu:
+    ascii_mode: true
+  app_options/com.apple.finder:
+    ascii_mode: true
+    no_inline: true
+  app_options/com.wolfram.Mathematica:
+    ascii_mode: true
+    no_inline: true
+  app_options/com.apple.launchpad.launcher:
+    ascii_mode: true
