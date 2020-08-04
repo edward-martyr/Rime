@@ -47,7 +47,6 @@ engine:
     - reverse_lookup_translator
     - script_translator
     - lua_translator@date_translator
-    - lua_translator@number_translator
   filters:
     - "simplifier@trad"
     - "simplifier@mainland_simplifier"

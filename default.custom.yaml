@@ -44,9 +44,6 @@ patch:
     Shift_L: noop
     Shift_R: noop
 
-  engine/translators:
-    - lua_translator@date_translator
-
   punctuator:
     full_shape:
       ' ' : { commit: '　' }
