@@ -1,16 +1,17 @@
 var:
-  last_build_time: 1596526873
+  last_build_time: 1597573818
   option:
+    extended_charset: true
     simplification: false
-  previously_selected_schema: luna_pinyin_ziam_tuan
+  previously_selected_schema: yahwe_zaonhe
   schema_access_time:
     hentaigana: 1594032043
     ipa_xsampa: 1594174436
     kanazaonhe: 1592141363
     langjin: 1595839926
-    liangfen: 1596526875
+    liangfen: 1597573578
     luna_pinyin: 1583330863
     luna_pinyin_simp: 1583329346
-    luna_pinyin_ziam_tuan: 1596526881
+    luna_pinyin_ziam_tuan: 1597573606
     nihongo_romaji: 1585809014
-    yahwe_zaonhe: 1596526874
+    yahwe_zaonhe: 1597573606
